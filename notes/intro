@@ -1,0 +1,16 @@
+
+
+What is Docker?
+Is a Platform for devs and Sysadmins used to develop, deploy and run containerized apps.
+
+Container?
+Is a running process that encapsulates everything an app needs to run ( and only those things )
+
+Docker makes it really easy to install and run software without worry about setup or dependencies.
+
+Image?
+Is a standaline, isolcated, lightweight and executable package that contains all the required components ( coded, runtime, system tools, libraries, settings ... etc) necessary to run an app.
+
+The container si the runtime instance of the image. From the same image you can launch more containers.
+
+Imageas for many applications can be found on https://hub.docker.com
