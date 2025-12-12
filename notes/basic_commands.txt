@@ -1,5 +1,21 @@
 # Docker verion.
 docker --version
 
-# docker information. Contains i
+# docker help : Complete inbuilt docker commands and their information.
+docker help
+
+# docker information. Contains information regarding containers, running. Paused. Stopped etc.
 docker info
+
+
+# search repository.
+docker search repoNameHere      # Check the 'starts' and 'official' flag.
+
+# Pull ( download the image )
+docker image pull imageName            # Latest image will be downloaded.
+docker image pull imageName:1.10.100   # image with specified version.
+
+
+# To view Images ( both show same result )
+docker image ls
+docker images
