@@ -10,3 +10,8 @@
 You directly control the container using it's name:(otherwise you have to use container ID)
  $ docker container stop mysiteX
  $ docker container start mysiteX
+
+
+# Run multiper containers:
+$ docker container run -d -p 8081:80 --name mysite1 nginx
+$ docker container run -d -p 8082:80 --name mysite2 httpd

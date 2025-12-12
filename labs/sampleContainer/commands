@@ -36,3 +36,7 @@ docker container start CONTAINER_ID
  
 # getting a shell into a container
 docker container run -it centos  # to detach from the container without stopping it press: Ctrl + P + Q
+
+
+# docker state:
+docker stats 

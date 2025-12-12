@@ -44,7 +44,6 @@ Essential options:
 ### List Images
  $ docker image ls
 Options:
-
 * `-a` → show all images (including intermediate layers)
 * `--digests` → show image digests
 
@@ -65,7 +64,8 @@ Essential options:
 * `-d` → detached (background)
 * `-it` → interactive terminal
 * `--name <name>` → custom container name
-* `-p hostPort:containerPort` → port mapping
+* `-p hostPort:containerPort` → port mapping              ( Manual mapping )
+* -P  : Publish all exposed ports to random host ports. ( Map them to random available ports on the host (your VM) )
 * `--rm` → auto-remove container on stop
 
 ---
