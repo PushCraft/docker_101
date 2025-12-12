@@ -3,7 +3,7 @@
 echo " Git Status: "
 git status
 
-git add *
+git add -A
 
 echo " Commiting changes : "
 git commit -m "Committing changes from user: $(whoami), time: $(date), machine: $(hostname)"
