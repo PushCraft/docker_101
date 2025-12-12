@@ -1,0 +1,17 @@
+# Run the container in background and 
+
+$  docker container run -d -P httpd
+
+    'docker container run' : Create and starts a new container.
+    -d  : Detached mode.
+    -P  : Docker checks the image meta data --> Finds all the ports marked with EXPOSE in the image 
+             ( httpd exposes port 80 )
+          Docker maps each exposed container port to random available port on the host.
+
+
+Verify the port mapping:
+ $ docker container ls        
+
+
+From host: 
+browser -->  http://VM-IP:32768
