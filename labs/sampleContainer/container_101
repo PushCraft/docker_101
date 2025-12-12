@@ -37,3 +37,21 @@ $ docker container ls -a
 
 # Start the container.
 $ docker container start <container-id>
+
+
+---------------------------------------------------------------------
+
+# Interactive terminal inside the container.
+
+ $ docker container run -it centos:7             # There is NO latest tag for CentOS anymore. You need to mention the tag.
+
+   -i = interactive. 
+        Keeps STDIN open ( lets you send input )
+        Allows you to type commands into the container.
+  - TTY = Allocates a presudo-terminal ( gives you a terminal interface )
+       Makes the shell behave like a real terminal
+
+    together -it => Give me an interactive terminal inside the container. 
+
+# To exit back:
+$ exit    
