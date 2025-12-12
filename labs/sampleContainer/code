@@ -32,6 +32,8 @@ $ docker container create -p 80:80 httpd
 
 # Verify
 $ docker ps -a        # This will show status 'created'.
+ or
+$ docker container ls -a
 
 # Start the container.
 $ docker container start <container-id>
