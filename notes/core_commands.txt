@@ -1,22 +1,161 @@
-# Docker verion.
-docker --version
 
-# docker help : Complete inbuilt docker commands and their information.
-docker help
-
-# docker information. Contains information regarding containers, running. Paused. Stopped etc.
-docker info
+## Docker Core Commands – Complete Notes (with Essential Options)
 
 
-# search repository.
-docker search repoNameHere      # Check the 'starts' and 'official' flag.
+## 1️⃣ Docker Environment & System
+### Check Docker Version
+ $ docker --version
+* Confirms Docker installation
+* Useful for compatibility checks
 
-# Pull ( download the image )
-docker image pull imageName            # Latest image will be downloaded.
-docker image pull imageName:1.10.100   # image with specified version.
+### Docker Help
+ $ docker help
+ $ docker <object> --help
+* Lists all commands and options
+* Works for `image`, `container`, `volume`, `network`
 
 
-# To view Images ( both show same result )
-docker image ls
-docker images
-** Both list Docker images stored on your local system.
+### Docker System Info
+ $ docker info
+* Engine configuration
+* Containers (running / stopped / paused)
+* Images, storage driver, root directory
+
+
+
+## 2️⃣ Image Management (Core)
+### Search Images (Docker Hub)
+ $ docker search <image>
+Essential fields to check:
+* ⭐ Stars (popularity)
+* ✅ Official (trusted images)
+
+
+### Pull Images
+ $ docker image pull <image>
+docker image pull <image>:<tag>
+Essential options:
+
+* `:latest` → default tag
+* Specific tags ensure reproducibility
+
+---
+
+### List Images
+ $ docker image ls
+Options:
+
+* `-a` → show all images (including intermediate layers)
+* `--digests` → show image digests
+
+---
+
+### Remove Images
+ $ docker image rm <image>
+Options:
+* `-f` → force removal (even if referenced)
+
+---
+
+## 3️⃣ Container Lifecycle (Very Important)
+### Run a Container
+ $ docker container run <image>
+Essential options:
+
+* `-d` → detached (background)
+* `-it` → interactive terminal
+* `--name <name>` → custom container name
+* `-p hostPort:containerPort` → port mapping
+* `--rm` → auto-remove container on stop
+
+---
+
+
+### List Containers
+ $ docker container ls
+Options:
+* `-a` → all containers (running + stopped)
+* `-q` → container IDs only
+
+---
+
+### Start / Stop / Restart Containers
+ $ docker container start <container>
+ $ docker container stop <container>
+ $ docker container restart <container>
+Options:
+* `-t <seconds>` → timeout before stop
+
+---
+### Remove Containers
+ $ docker container rm <container>
+Options:
+* `-f` → force remove running container
+
+---
+
+## 4️⃣ Inspecting & Debugging Containers
+### View Container Logs
+ $ docker container logs <container>
+Options:
+* `-f` → follow logs (stream)
+* `--tail <n>` → last N lines
+
+---
+### Execute Command Inside Running Container
+ $ docker container exec -it <container> <command>
+Common usage:
+ $ docker container exec -it mycontainer /bin/bash
+
+
+---
+
+### Inspect Container or Image
+ $ docker inspect <container|image>
+* Outputs detailed JSON metadata
+* Useful for networking, mounts, configs
+
+---
+
+## 5️⃣ Cleanup & Resource Management (Core in Practice)
+### Remove Unused Resources
+ $ docker system prune
+Options:
+* `-a` → remove unused images as well
+* `--volumes` → remove unused volumes
+⚠️ Use with caution in shared systems
+
+---
+
+## 6️⃣ Volumes (Core Basics)
+### List Volumes
+ $ docker volume ls
+
+### Create Volume
+ $ docker volume create <name>
+
+### Remove Volume
+ $ docker volume rm <name>
+
+
+---
+## 7️⃣ Networks (Core Basics)
+### List Networks
+ $ docker network ls
+
+### Inspect Network
+ $ docker network inspect <network>
+
+
+---
+
+## 🧠 Core Mental Models (Exam & Real-World)
+
+* **Images** → immutable blueprints
+* **Containers** → running instances
+* **Volumes** → persistent data
+* **Networks** → container communication layer
+
+Docker workflow always follows:
+
+> Image → Container → Logs / Exec → Cleanup
