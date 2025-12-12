@@ -1,0 +1,65 @@
+## Docker Images & Containers – Listing and Filtering
+
+
+## 1️⃣ View Local Docker Images
+
+Shows all images downloaded and stored locally on the system.
+$ docker images
+Modern (recommended) form:
+$ docker image ls
+* Both commands show the **same output**
+* `docker image ls` follows Docker’s newer object-based CLI style
+
+
+## 2️⃣ List Docker Containers
+
+### Show all containers (running + stopped)
+$ docker ps -a
+Modern (recommended) form:
+$ docker container ls -a
+* `-a` → shows **all containers**, including:
+  * Running
+  * Exited
+  * Created
+
+Without `-a`, only **running containers** are displayed.
+
+---
+
+## 3️⃣ Filter Containers by <key>=<value>
+
+### Show only exited containers
+Syntax:
+docker container ls -a -f <key>=<value>
+
+Filter using 'status'
+$ docker container ls -a -f status=exited
+
+* `-f` → apply a filter
+* `status=exited` → show containers that are stopped and exited
+
+other examples:
+docker container ls -a -f name=web
+docker container ls -a -f id=c75df2
+docker container ls -a -f before=mysite1
+docker container ls -a -f status=exited -f ancestor=nginx -q      # Adding two filters.
+---
+
+## 4️⃣ Display Only Container IDs
+### Get IDs of exited containers (useful for cleanup)
+$ docker container ls -a -f status=exited -q
+* `-q` → quiet mode (prints only container IDs)
+* Commonly used with commands like:
+$ docker container rm $(docker container ls -a -f status=exited -q)
+
+
+---
+
+## 🧠 Key Takeaways
+
+* `docker image ls` → list local images
+* `docker container ls -a` → list all containers
+* `-a` → include stopped/hidden containers
+* `-f` → filter output
+* `-q` → return only container IDs
+
