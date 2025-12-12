@@ -19,3 +19,4 @@ docker image pull imageName:1.10.100   # image with specified version.
 # To view Images ( both show same result )
 docker image ls
 docker images
+** Both list Docker images stored on your local system.
