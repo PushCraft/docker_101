@@ -29,7 +29,6 @@ $ docker container create -p 80:80 httpd
       This means:
         Apache (httpd) listens on port 80 inside the container
         Docker forwards traffic from host port 80 → container port 80
-              Flow =  Client --> HOST:80  -> Container:80 --> httpd
 
 # Verify
 $ docker ps -a        # This will show status 'created'.
