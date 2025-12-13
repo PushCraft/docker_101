@@ -129,6 +129,18 @@ $ docker image rmi -f <image-name | image-id>
 
 Flow :>
 Stop → Remove Container → Remove Image
+---
+
+# Dangling Images:
+Docker images consist of multiple layers. Dangling images are layers that have no relationship to any tagged images.
+To delete dangling images, stopped containers and networks not used by at least one container
+run $ docker system prune
+
+To remove unused images as well
+$ docker system prune -a
+* This will also delete the build cache. 
+
+
 
 
 ---
