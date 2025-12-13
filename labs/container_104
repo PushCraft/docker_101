@@ -1,0 +1,178 @@
+
+
+## 📦 Docker Container Monitoring & Inspection Commands
+
+These commands help you **observe, debug, and understand** what’s happening inside running containers. In real-world DevOps work, you’ll use these daily when troubleshooting applications, performance issues, or networking problems.
+
+---
+
+## 🔌 1. View Port Mappings of a Container
+
+### Command
+
+$ docker container port <container_name_or_id>
+
+
+### What it does
+
+Shows how **container ports** are mapped to **host ports**.
+
+### Example
+$ docker container port webapp
+### Sample Output
+80/tcp -> 0.0.0.0:8080
+
+
+📌 **Meaning:**
+Traffic sent to `localhost:8080` on the host is forwarded to port `80` inside the container.
+
+🧠 **Common use case:**
+You forgot which port your app is exposed on.
+
+---
+
+## 📜 2. View Container Logs
+### Basic logs
+ $ docker container logs <container_name_or_id>
+
+### Follow logs in real time
+ $ docker container logs -f <container_name_or_id>
+
+
+### Example
+$ docker container logs -f api-service
+
+
+🧠 **Real-world use cases**
+
+* App crashes on startup
+* Debugging errors (DB connection, env vars missing)
+* Watching logs during deployments
+
+---
+
+## ⚙️ 3. View Running Processes Inside a Container
+### Docker-native way
+$ docker container top <container_name_or_id>
+
+
+### Example
+$ docker container top nginx
+### Sample Output
+
+PID   USER   TIME   COMMAND
+1     root   0:00   nginx: master process
+
+
+📌 **Important:**
+This shows processes **inside the container**, not the host.
+
+---
+
+## 🖥️ 4. View Processes on the Host (Not Container)
+$ ps -ef | grep <keyword>
+
+
+### Example
+$ ps -ef | grep docker
+
+
+⚠️ **Key difference**
+
+* `docker container top` → container-level
+* `ps -ef` → host-level
+
+🧠 Useful when:
+
+* Checking Docker daemon
+* Verifying background services
+* Debugging resource leaks on the host
+
+---
+
+## 📊 5. View Container Resource Usage (CPU, Memory, Network)
+
+### All containers
+
+
+$ docker container stats             # Real-time
+### Specific container
+$ docker container stats <container_name_or_id>
+
+
+### Example
+$ docker container stats redis
+
+
+### Metrics shown
+* CPU usage
+* Memory usage / limits
+* Network I/O
+* Disk I/O
+
+🧠 **Real-world use case**
+
+* Identify containers consuming high CPU or memory
+* Capacity planning
+* Performance tuning
+
+---
+
+## 🔍 6. Inspect Detailed Container Configuration
+$ docker container inspect <container_name_or_id>
+
+### Example
+$ docker container inspect mysiteX
+
+
+### Filter specific details using `grep`
+$ docker container inspect mysiteX | grep -i ipaddress
+
+
+📌 **Useful inspection data**
+* IP address
+* Mounted volumes
+* Environment variables
+* Network settings
+* Restart policies
+
+🧠 **DevOps tip:**
+`docker inspect` is your **single source of truth** when debugging container behavior.
+
+---
+
+## 🧰 7. Third-Party Monitoring & Management Tools
+
+In production environments, Docker CLI alone isn’t enough. Common tools include:
+
+* **Prometheus + Grafana** → Metrics & dashboards
+* **ELK Stack** → Centralized logging
+* **Datadog / New Relic** → Full observability
+* **Portainer** → GUI-based container management
+
+📌 These tools provide:
+
+* Alerting
+* Historical data
+* Visual dashboards
+* Multi-host visibility
+
+---
+
+## 🧠 Summary (Mental Model)
+
+Think of containers like **small, isolated machines**:
+
+* `logs` → What the app is saying
+* `top` → What’s running inside
+* `stats` → How hard it’s working
+* `port` → How traffic reaches it
+* `inspect` → Its full blueprint
+
+---
+
+If you want, next we can:
+
+* Convert this into a **printable Docker cheat sheet (PDF)**
+* Add **exam-oriented notes (CKA / Docker Associate style)**
+* Map these commands to **real production incidents** 🚨
