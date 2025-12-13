@@ -63,3 +63,77 @@ $ docker container rm $(docker container ls -a -f status=exited -q)
 * `-f` → filter output
 * `-q` → return only container IDs
 
+--------------------------------------------------------------------------------------------------
+
+## Docker Cleanup – Removing Containers and Images
+## 1️⃣ Removing Containers (Core Lifecycle Rule)
+### Stop a Running Container
+$ docker container stop <container-id | container-name>
+* Gracefully stops a running container
+* Sends SIGTERM, then SIGKILL after timeout
+* A container must be **stopped** before normal removal
+
+### Remove a Stopped Container
+$ docker container rm <container-id | container-name>
+* Permanently deletes the container
+* Container must be in `Exited` or `Created` state
+
+### Force Remove a Running Container
+$ docker container rm -f <container-id | container-name>
+* Stops and removes the container in one step
+* Use only when graceful stop is not required
+
+⚠️ Use with caution in production environments
+
+---
+
+## 2️⃣ Removing Multiple Containers (Bulk Cleanup)
+### Remove All Exited Containers
+$ docker container rm $(docker container ls -a -f status=exited -q)
+
+* `-f status=exited` → filters stopped containers
+* `-q` → returns only container IDs
+* Command substitution removes all exited containers at once
+
+
+## 3️⃣ Container vs Image Dependency Rule (Very Important)
+
+> **Containers must be removed before their images can be deleted.**
+* Images cannot be removed if **any container exists** using them
+* This applies even if the container is stopped
+
+Correct order:
+Container → Image
+
+
+## 4️⃣ Removing Images
+### Remove an Image (Safe)
+$ docker image rmi <image-name | image-id>
+* Removes the specified image
+* Fails if containers still reference the image
+
+### Force Remove an Image
+$ docker image rmi -f <image-name | image-id>
+* Forces image removal
+* Can remove images with stopped containers referencing them
+
+⚠️ Use with caution
+
+---
+
+## 🧠 Mental Model Summary
+
+* Containers depend on images
+* Images do not depend on containers
+* Removal order always matters
+
+Flow :>
+Stop → Remove Container → Remove Image
+
+
+---
+
+## ✅ Exam & Real-World Takeaway
+
+> Docker enforces dependency order: containers must be stopped and removed before the associated image can be deleted.
+
