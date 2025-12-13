@@ -1,0 +1,189 @@
+
+## 🧪 Creating a Custom Docker Image Using `docker commit`
+
+This method lets you **turn a modified container into a reusable Docker image**. Think of it as taking a snapshot of a container after you’ve manually installed software or made changes.
+
+⚠️ Important upfront note (very DevOps-relevant):
+`docker commit` is **great for learning, debugging, and quick experiments**, but **Dockerfiles are preferred** for production and CI/CD. We’ll still master this because you *will* see it in real environments.
+
+
+## 🔁 High-Level Workflow (Mental Model)
+Pull Image → Run Container → Make Changes → Exit Container → Commit → New Image
+*You start with a base image, modify a running container, then freeze those changes into a new image.
+
+---
+
+## 📥 1. Pull a Base Image
+### Example
+$ docker pull ubuntu:22.04
+
+This image becomes your **foundation layer**.
+
+## ▶️ 2. Run a Container from the Base Image
+$ docker container run -it ubuntu:22.04 /bin/
+* `-i` → Interactive
+* `-t` → Allocate terminal
+* `/bin/` → Start a shell inside the container
+
+You are now **inside the container**.
+---
+## 🛠️ 3. Make Changes Inside the Container
+Install packages, create files, update configs, Whatever changes are required etc.
+
+### Example
+apt update
+apt install -y curl vim nginx
+Create a test file:
+add custom /etc/skel
+echo "Custom Image Created" > /opt/custom.txt
+
+At this point, the container has **state changes** that do *not* exist in the original image.
+
+---
+
+## 🚪 4. Exit the Container
+
+
+exit
+
+
+The container stops and enters an **Exited** state.
+
+Check:
+
+
+docker container ls -a
+
+
+You’ll see:
+
+
+STATUS: Exited (0)
+
+
+---
+
+## 📸 5. Commit the Container into a New Image
+
+### Command Syntax
+
+
+docker commit -m "Commit message" -a "Author Name" <container_id> repoUsername/newImageName:tag
+
+
+### Example
+
+
+docker commit \
+  -m "Added nginx, curl, vim" \
+  -a "Karan DevOps" \
+  a1b2c3d4 \
+  pushcraft/custom-ubuntu:1.0
+
+
+### Options Explained
+
+* `-m` → Commit message (what changed)
+* `-a` → Author
+* `<container_id>` → Exited container ID
+* `repo/name:tag` → New image name
+
+---
+
+## 🖼️ 6. Verify the New Image
+
+
+docker images
+
+
+Sample output:
+
+
+REPOSITORY               TAG     IMAGE ID       CREATED
+pushcraft/custom-ubuntu  1.0     e3f1a9b2c7     10 seconds ago
+
+
+🎉 Your custom image now exists locally.
+
+---
+
+## ▶️ 7. Run a Container from the New Image
+
+### Command
+
+
+docker container run -it pushcraft/custom-ubuntu:1.0 /bin/
+
+
+Verify your changes:
+
+
+nginx -v
+cat /opt/custom.txt
+
+
+✔️ All installed software and files are present.
+
+---
+
+## 🧠 What `docker commit` Actually Does
+
+* Captures the **filesystem changes** of a container
+* Creates a **new image layer**
+* Does **not** capture:
+
+  * Running processes
+  * Environment variables set at runtime (unless baked into files)
+
+Think of it like saving a **VM snapshot**, but lighter and layered.
+
+---
+
+## ⚠️ Best Practices & Real-World Notes
+
+### When `docker commit` is useful
+
+* Learning Docker fundamentals
+* Debugging production issues
+* Creating a quick test image
+* Reverse-engineering a container
+
+### When NOT to use it
+
+* CI/CD pipelines
+* Team collaboration
+* Production image builds
+
+📌 **Why Dockerfiles win**
+
+* Version-controlled
+* Repeatable
+* Auditable
+* Works with CI tools (GitHub Actions, Jenkins)
+
+---
+
+## 🧾 Quick Comparison
+
+| Method        | Use Case                  | Recommended |
+| ------------- | ------------------------- | ----------- |
+| docker commit | Learning / quick snapshot | ⚠️ Limited  |
+| Dockerfile    | Production / CI/CD        | ✅ Yes       |
+
+---
+
+## 🧠 Summary (One-Liner)
+
+`docker commit` lets you **turn a modified container into a reusable image**, but Dockerfiles are the **professional standard** for building images in real DevOps workflows.
+
+---
+
+If you want, next we can:
+
+* Convert this into a **Dockerfile version** of the same image
+* Show how this maps to **CI/CD pipelines**
+* Add **exam-focused notes (Docker / Kubernetes perspective)**
+
+
+
+# Tagging and Pushing Custom images to 'Docker Hub'.
