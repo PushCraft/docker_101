@@ -168,11 +168,3 @@ Think of containers like **small, isolated machines**:
 * `stats` → How hard it’s working
 * `port` → How traffic reaches it
 * `inspect` → Its full blueprint
-
----
-
-If you want, next we can:
-
-* Convert this into a **printable Docker cheat sheet (PDF)**
-* Add **exam-oriented notes (CKA / Docker Associate style)**
-* Map these commands to **real production incidents** 🚨
