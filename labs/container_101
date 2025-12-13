@@ -79,6 +79,8 @@ $ docker container run --rm rockylinux:9 cat /etc/os-release
  * This auto-cleans the container after execution.
 
 
-
- # Debugging a running container: Container is already running. use 'exec'
-$ docker container exec -it mysiteX /bin/bash 
+# Debugging a running container: Container is already running. use 'exec'
+$ docker container exec -it mysiteX /bin/bash              
+ * For the container to remain running : Use options : CTRL + P + Q ( Instead of typing 'exit' ))
+ * If you have started a container without 'd' and want to run in the background : Use CTRL + P + Q
+              
