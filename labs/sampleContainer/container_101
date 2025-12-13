@@ -45,7 +45,7 @@ $ docker container start <container-id>
 
 # Interactive terminal inside the container.
 
- $ docker container run -it centos:7             # There is NO latest tag for CentOS anymore. You need to mention the tag.
+ $ docker container run -it rockylinux:9             # There is NO latest tag for CentOS anymore. You need to mention the tag.
 
    -i = interactive. 
         Keeps STDIN open ( lets you send input )
@@ -55,14 +55,16 @@ $ docker container start <container-id>
     together -it => Give me an interactive terminal inside the container. 
 
 more examples:
-$ docker container run -it ubuntu /bin/bash   # Will default to shell. ( Some images does not default to 'shell, It's a good practice to use it')
+$ docker container run -it ubuntu /bin/bash   # Will default to shell.
+  * Some images does not default to 'shell, It's a good practice to use it'.
+  * If you don't specific for 'nginx', It won't take you to it's shell unless you specifiiy. ( docker runs whatever CMD is defined in the image )
 
 # To exit back:
 $ exit    
 
 # One-off container execution  : You do not need "it" option for this. 
 
-$ docker container run centos:7 cat /etc/os-release
+$ docker container run rockylinux:9 cat /etc/os-release
 **As soon as cat finishes,Container stops immediately.Status becomes Exited (0)
 
 more examples:
@@ -73,7 +75,7 @@ $ docker run python:3.12 python --version
 
 
 If you don't want the stopped container to remain: You can also add 'rm'.
-$ docker container run --rm centos:7 cat /etc/os-release
+$ docker container run --rm rockylinux:9 cat /etc/os-release
  * This auto-cleans the container after execution.
 
 
