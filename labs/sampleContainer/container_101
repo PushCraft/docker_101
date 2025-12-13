@@ -39,6 +39,7 @@ $ docker container ls -a
 # Start the container.
 $ docker container start <container-id>
 
+*Container should have a unique name. 
 
 ---------------------------------------------------------------------
 
@@ -51,8 +52,31 @@ $ docker container start <container-id>
         Allows you to type commands into the container.
   - TTY = Allocates a presudo-terminal ( gives you a terminal interface )
        Makes the shell behave like a real terminal
-
     together -it => Give me an interactive terminal inside the container. 
+
+more examples:
+$ docker container run -it ubuntu /bin/bash   # Will default to shell. ( Some images does not default to 'shell, It's a good practice to use it')
 
 # To exit back:
 $ exit    
+
+# One-off container execution  : You do not need "it" option for this. 
+
+$ docker container run centos:7 cat /etc/os-release
+**As soon as cat finishes,Container stops immediately.Status becomes Exited (0)
+
+more examples:
+$ docker run alpine uname -a
+$ docker container run --name mySiteX centos whoami  
+$ docker run ubuntu ls /etc
+$ docker run python:3.12 python --version
+
+
+If you don't want the stopped container to remain: You can also add 'rm'.
+$ docker container run --rm centos:7 cat /etc/os-release
+ * This auto-cleans the container after execution.
+
+
+
+ # Debugging a running container: Container is already running. use 'exec'
+$ docker container exec -it mysiteX /bin/bash 
