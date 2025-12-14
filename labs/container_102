@@ -2,7 +2,7 @@
 # Container Name
 
  $ docker container run -d -p 8080:80 --name mysiteX nginx
- --name    → Assign a custom name to the container (mysiteX)
+ --name    → Assign a custom name to the container (mysiteX) ; Has to be unique. 
     Assigns a human-readable name to the container
     Makes management easier than using container IDs
 **If you don't assign an 'container name', Docker will automatically assign it for you.
@@ -10,7 +10,6 @@
 You directly control the container using it's name:(otherwise you have to use container ID)
  $ docker container stop mysiteX
  $ docker container start mysiteX
-
 
 # Run multiple containers:
 $ docker container run -d -p 8081:80 --name mysite1 nginx

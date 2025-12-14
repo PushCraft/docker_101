@@ -1,7 +1,8 @@
-
 ## Docker Images & Containers – Listing and Filtering
 
+
 ## 1️⃣ View Local Docker Images
+
 Shows all images downloaded and stored locally on the system.
 $ docker images
 Modern (recommended) form:
@@ -11,6 +12,7 @@ $ docker image ls
 
 
 ## 2️⃣ List Docker Containers
+
 ### Show all containers (running + stopped)
 $ docker ps -a
 Modern (recommended) form:
@@ -19,17 +21,20 @@ $ docker container ls -a
   * Running
   * Exited
   * Created
+
 Without `-a`, only **running containers** are displayed.
 
 ---
 
 ## 3️⃣ Filter Containers by <key>=<value>
+
 ### Show only exited containers
 Syntax:
 docker container ls -a -f <key>=<value>
 
 Filter using 'status'
 $ docker container ls -a -f status=exited
+
 * `-f` → apply a filter
 * `status=exited` → show containers that are stopped and exited
 
@@ -47,13 +52,17 @@ $ docker container ls -a -f status=exited -q
 * Commonly used with commands like:
 $ docker container rm $(docker container ls -a -f status=exited -q)
 
+# You can do the same with 'Images' too:
+ $ docker images  -q
+  *This will provide you ID's of local images.
 
 ---
 
 ## 🧠 Key Takeaways
+
 * `docker image ls` → list local images
 * `docker container ls -a` → list all containers
-* `-a` → include stopped/hidden containers, Otherwise you will only see 'running' containers. 
+* `-a` → include stopped/hidden containers
 * `-f` → filter output
 * `-q` → return only container IDs
 
@@ -76,6 +85,7 @@ $ docker container rm <container-id | container-name>
 $ docker container rm -f <container-id | container-name>
 * Stops and removes the container in one step
 * Use only when graceful stop is not required
+
 ⚠️ Use with caution in production environments
 
 ---
@@ -83,6 +93,7 @@ $ docker container rm -f <container-id | container-name>
 ## 2️⃣ Removing Multiple Containers (Bulk Cleanup)
 ### Remove All Exited Containers
 $ docker container rm $(docker container ls -a -f status=exited -q)
+
 * `-f status=exited` → filters stopped containers
 * `-q` → returns only container IDs
 * Command substitution removes all exited containers at once

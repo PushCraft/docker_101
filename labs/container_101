@@ -1,4 +1,6 @@
+
 # Run the container in background and 
+
 $  docker container run -d -P httpd
 
     'docker container run' : "Create and starts" a new container.
@@ -6,7 +8,7 @@ $  docker container run -d -P httpd
     -P  : Docker checks the image meta data --> Finds all the ports marked with EXPOSE in the image 
              ( httpd exposes port 80 )
           Docker maps each exposed container port to random available port on the host.
-
+  *If you don't add "P" or 'p' => No Port is published to the host. So the container is running, but it’s invisible from your host browser.
 
 Verify the port mapping:
  $ docker container ls        
@@ -15,16 +17,13 @@ Verify the port mapping:
 From host: 
 browser -->  http://VM-IP:32768
 
-
-
-
 ------------------------------------------------------------------------
 
 # Create a container + Map ports
 $ docker container create -p 80:80 httpd
     Only create a container ( does not start it ) 
     -p 80:80  -->  Mapping a host port to a container port
-      Left side ==> Host port  ;  Right side ==> Container port. 
+      Left side ==> Host port  :  Right side ==> Container port. 
 
       This means:
         Apache (httpd) listens on port 80 inside the container
@@ -38,15 +37,12 @@ $ docker container ls -a
 
 # Start the container.
 $ docker container start <container-id>
-
 *Container should have a unique name. 
 
 ---------------------------------------------------------------------
 
 # Interactive terminal inside the container.
-
- $ docker container run -it rockylinux:9             # There is NO latest tag for CentOS anymore. You need to mention the tag.
-
+ $ docker container run -it rockylinux:9             
    -i = interactive. 
         Keeps STDIN open ( lets you send input )
         Allows you to type commands into the container.
@@ -58,9 +54,12 @@ more examples:
 $ docker container run -it ubuntu /bin/bash   # Will default to shell.
   * Some images does not default to 'shell, It's a good practice to use it'.
   * If you don't specific for 'nginx', It won't take you to it's shell unless you specifiiy. ( docker runs whatever CMD is defined in the image )
+  * you also need to specify the path for 'httpd'.
 
-# To exit back:
+# To exit back: Use , This will close the process though.
 $ exit    
+* IF you do not want to turn off the container, Press : CTRL + P + Q.
+
 
 # One-off container execution  : You do not need "it" option for this. 
 
