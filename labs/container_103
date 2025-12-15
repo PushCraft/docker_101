@@ -108,13 +108,11 @@ $ docker image rmi <image-name | image-id>
 $ docker image rmi -f <image-name | image-id>
 * Forces image removal
 * Can remove images with stopped containers referencing them
-
 ⚠️ Use with caution
 
 ---
 
 ## 🧠 Mental Model Summary
-
 * Containers depend on images
 * Images do not depend on containers
 * Removal order always matters
