@@ -8,7 +8,7 @@ $  docker container run -d -P httpd
     -P  : Docker checks the image meta data --> Finds all the ports marked with EXPOSE in the image 
              ( httpd exposes port 80 )
           Docker maps each exposed container port to random available port on the host.
-  *If you don't add "P" or 'p' => No Port is published to the host. So the container is running, but it’s invisible from your host browser.
+  *If you don't add "P"( automatic ) or 'p' ( manual ) => No Port is published to the host. So the container is running, but it’s invisible from your host browser.
 
 Verify the port mapping:
  $ docker container ls        
