@@ -11,6 +11,22 @@ You directly control the container using it's name:(otherwise you have to use co
  $ docker container stop mysiteX
  $ docker container start mysiteX
 
+
+
+**What happens when you 'create' an container:
+ 1. Creates the container
+ 2. Configures iptables / NAT rules on the host.
+ 3. Binds host port --> Container Port.
+**Ports are immutable after creation.
+**Ports are linked at compile time ( when you create container )
+*If you have a already created an 'container' : You can not re-define the Ports.
+  You have to remove the container and re-create/run the container using required Port
+
+**run => create + Start. 
+
+
+
+
 # Run multiple containers:
 $ docker container run -d -p 8081:80 --name mysite1 nginx
 $ docker container run -d -p 8082:80 --name mysite2 httpd

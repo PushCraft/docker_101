@@ -7,14 +7,10 @@ These commands help you **observe, debug, and understand** what’s happening in
 ---
 
 ## 🔌 1. View Port Mappings of a Container
-
-### Command
-
 $ docker container port <container_name_or_id>
 
 
 ### What it does
-
 Shows how **container ports** are mapped to **host ports**.
 
 ### Example
@@ -37,8 +33,6 @@ You forgot which port your app is exposed on.
 
 ### Follow logs in real time
  $ docker container logs -f <container_name_or_id>
-
-
 ### Example
 $ docker container logs -f api-service
 
@@ -55,7 +49,6 @@ $ docker container logs -f api-service
 ### Docker-native way
 $ docker container top <container_name_or_id>
 
-
 ### Example
 $ docker container top nginx
 ### Sample Output
@@ -63,11 +56,6 @@ $ docker container top nginx
 PID   USER   TIME   COMMAND
 1     root   0:00   nginx: master process
 
-
-📌 **Important:**
-This shows processes **inside the container**, not the host.
-
----
 
 ## 🖥️ 4. View Processes on the Host (Not Container)
 $ ps -ef | grep <keyword>
@@ -93,9 +81,8 @@ $ ps -ef | grep docker
 ## 📊 5. View Container Resource Usage (CPU, Memory, Network)
 
 ### All containers
-
-
 $ docker container stats             # Real-time
+
 ### Specific container
 $ docker container stats <container_name_or_id>
 

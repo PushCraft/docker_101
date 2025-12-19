@@ -235,24 +235,19 @@ $ docker images
 Ensure the image name matches:
 repoUsername/imageName:tag
 
-
 Docker Hub **requires** this format.
-
----
-
 ### 📤 3. Push the Image
 $ docker image push repoUsername/imageName:customTag
 
 
 ### Example
-
-
 $ docker image push pushcraft/custom-ubuntu:v1
+
 
 Docker uploads each image layer to Docker Hub.
 
 example :
- $  docker image push kara101/kara101:tagX kara101/kara101:tagX
+ $  docker image push kara101/kara101:tagX 
 ---
 
 ### ✅ 4. Verify on Docker Hub
