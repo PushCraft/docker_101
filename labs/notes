@@ -1,0 +1,14 @@
+
+**A container lives only as long as its main process (PID X) lives
+
+
+
+
+# Inpecting layers:
+$ docker image history my-imageName
+ ** This will show:
+         Each layer
+         Size
+         Command used
+
+

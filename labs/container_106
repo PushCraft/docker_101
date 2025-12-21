@@ -1,2 +1,62 @@
 
-# Image Structure and Layers:
+# Docker Image Structure & Layers – Fundamentals
+
+* A **Docker image** is a **read-only template** used to create containers
+* Image = **multiple read-only filesystem layers + metadata**
+* Image does **not include a kernel** (uses host kernel)
+
+---
+
+## Image Layers
+
+* Each Dockerfile instruction creates a **new layer**
+* Layers are **immutable**
+* Layers are **cached and shared** across images
+
+---
+
+## Union Filesystem
+
+* Docker stacks layers using **OverlayFS**
+* Upper layers override lower layers
+* Appears as a single filesystem
+
+---
+
+## Container Layer
+
+* Running a container adds **one writable layer**
+* All runtime changes go here
+* Deleting container removes changes
+
+---
+
+## Why Layers Matter
+
+* Faster builds (caching)
+* Smaller images (layer sharing)
+* Reproducible deployments
+
+---
+
+## Best Practice
+
+* Combine commands in one `RUN`
+* Always:
+
+```
+apt-get update && apt-get install
+```
+
+* Clean cache to reduce size
+
+---
+
+## Key Takeaway
+
+**Image = read-only layers**
+**Container = image + writable layer**
+
+---
+
+If you want, I can compress this further into a **5-line exam memory version** or map it directly to **Docker interview questions**.

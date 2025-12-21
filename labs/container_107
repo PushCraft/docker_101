@@ -1,0 +1,39 @@
+# Dockerfile – Fundamentals
+
+* A **Dockerfile** is a **text file with instructions** to build a Docker image
+* It defines **how the image is created**, step by step
+* Each instruction creates a **new image layer**
+* Ensures **repeatable and consistent image builds**
+
+---
+
+## What Dockerfile Contains
+
+* Base image (`FROM`)
+* Commands to install software (`RUN`)
+* Files to copy (`COPY` / `ADD`)
+* Default startup command (`CMD` / `ENTRYPOINT`)
+* Metadata (ports, environment variables)
+
+---
+
+## Why Dockerfile is Used
+
+* Automates image creation
+* Avoids manual setup
+* Enables version control for images
+* Used in CI/CD pipelines
+
+---
+
+## Key Takeaway
+
+**Dockerfile = blueprint for building Docker images**
+
+---
+
+If you want, I can also give:
+
+* **5 most important Dockerfile instructions**
+* **One-line interview definition**
+* **Dockerfile vs Image vs Container (1-table)**
