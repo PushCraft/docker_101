@@ -29,11 +29,3 @@
 ## Key Takeaway
 
 **Dockerfile = blueprint for building Docker images**
-
----
-
-If you want, I can also give:
-
-* **5 most important Dockerfile instructions**
-* **One-line interview definition**
-* **Dockerfile vs Image vs Container (1-table)**
